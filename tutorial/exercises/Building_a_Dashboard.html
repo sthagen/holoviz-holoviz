@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta charset="utf-8"/>
+<title>Building a Dashboard — HoloViz 0.11.3 documentation</title>
+<meta content="High-level tools to simplify visualization in Python." name="description"/>
+<meta content="HoloViz authors" name="author"/>
+<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+    WebFont.load({
+      google: {
+        families: ['Source Sans Pro']
+      }
+    });
+  </script>
+<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="../../_static/css/main.css" rel="stylesheet"/>
+<link href="../../_static/nbsite.css" rel="stylesheet"/>
+<link href="../../_static/custom.css" rel="stylesheet"/>
+<!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript">
+</script>
+<script src="../../_static/js/main.js"></script>
+<script src="../../_static/nbsite.js"></script>
+<script src="../../_static/require.js"></script>
+<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="../../_static/favicon.ico" rel="icon" type="image/png"/>
+<!-- Canonical
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="/tutorial/exercises/Building_a_Dashboard.html" rel="canonical">
+</link></head>
+<body class="">
+<header class="navigation">
+<div class="wrapper">
+<a class="logo" href="../../index.html">
+<img alt="Logo" src="../../_static/holoviz-logo.svg"/>
+</a>
+<a class="navigation-menu logo-text" href="../../index.html">HoloViz</a>
+<a class="navigation-menu-button" href="javascript:void(0)" id="js-mobile-menu">Menu</a>
+<nav>
+<ul class="navigation-menu show" id="js-navigation-menu">
+<li class="nav-link doc-head"><a href="../../installation.html">Installation</a></li>
+<li class="nav-link doc-head"><a href="../../talks/index.html">Talks</a></li>
+<li class="nav-link doc-head"><a href="../index.html">Tutorial</a></li>
+<li class="nav-link doc-head"><a href="../../topics/index.html">Topics</a></li>
+<li class="nav-link doc-head"><a href="../../FAQ.html">FAQ</a></li>
+<li class="nav-link doc-head"><a href="../../about.html">About</a></li>
+<li class="nav-link doc-head"><a href="../../community.html">Community</a></li>
+<li class="nav-link">
+<div style="display:inline-block;vertical-align: middle;">
+<div class="search-bar">
+<form action="../../search.html" method="get" role="search">
+<input name="q" placeholder="Search" type="search"/>
+<button type="submit">
+<img alt="Search Icon" src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon-black.png"/>
+</button>
+</form>
+</div>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<!-- MAIN BODY OF DOCS –––––––––––––––––– -->
+<div class="docs section">
+<div id="hacketyhackhack"> <!-- style="width:20%;margin-right: 100px;"> --> <!--style="display: none;"> style="display:none;"> -->
+<div class="toc" style="width:15%; margin-right:20px;">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../talks/index.html">Talks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/index.html">Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a></li>
+</ul>
+</div>
+</div>
+<div class="content"> <!-- style="max-width:80%;margin-left:auto;margin-right: auto;">-->
+<div class="section" id="building-a-dashboard">
+<h1>Building a Dashboard<a class="headerlink" href="#building-a-dashboard" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://raw.githubusercontent.com/pyviz/pyviz/master/examples/tutorial/exercises/Building_a_Dashboard.ipynb">Right click to download this notebook from GitHub.</a></p>
+<hr class="docutils"/>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">panel</span> <span class="k">as</span> <span class="nn">pn</span>
+<span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
+<span class="kn">from</span> <span class="nn">holoviews</span> <span class="k">import</span> <span class="n">opts</span>  <span class="c1"># noqa</span>
+
+<span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">'katex'</span><span class="p">)</span>
+<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">'bokeh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">¶</a></h3><p>In this exercise you will construct a number of Panel components and then lay them out as a non-interactive Panel dashboard.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-data">The data<a class="anchor-link" href="#The-data">¶</a></h4><p>Throughout this tutorial we will be working with one core dataset, a collection of earthquakes recorded between 2000-2018 provided by the US Geological Survey (USGS). The data is provided as a Parquet file as part of the tutorial and we will load it using Dask and persist it. We will return to this later; for now we will focus on building a dashboard and you don't know any of the details about the dataset or the Dask or Pandas API.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="nn">dd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'../../data/earthquakes.parq'</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">persist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-logo">The logo<a class="anchor-link" href="#The-logo">¶</a></h4><p>The first component of the dashboard is an image of the US Geological Survey logo. Start by declaring a pane containing the logo and assign it to the <code>logo</code> variable. Also set a width to ensure the logo doesn't appear too big.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">logo_url</span> <span class="o">=</span> <span class="s1">'../../assets/usgs_logo.png'</span>
+
+<span class="c1">## Define a panel component containing the logo</span>
+<span class="n">logo</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">## Display it</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+logo = pn.panel(logo_url, width=300) 
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Richter-scale-equation">Richter scale equation<a class="anchor-link" href="#Richter-scale-equation">¶</a></h4><p>Next we will create a component to display the equation for the Richter scale definition. Declare the appropriate pane and assign it to the <code>equation</code> variable.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">equation_string</span> <span class="o">=</span> <span class="s1">'$M_L = log_</span><span class="si">{10}</span><span class="s1">A - log_</span><span class="si">{10}</span><span class="s1"> A_0(\delta)$'</span>
+
+<span class="c1">## Define a panel component containing the equation (Hint: Use the LaTeX pane)</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">## Display it</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+logo = pn.pane.LaTeX(equation_string) 
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="List-the-strongest-earthquakes">List the strongest earthquakes<a class="anchor-link" href="#List-the-strongest-earthquakes">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2000</span>
+
+<span class="k">def</span> <span class="nf">strongest_earthquakes_fn</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="n">year_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">year_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'mag'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">][[</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'place'</span><span class="p">,</span> <span class="s1">'mag'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">## Create a panel component by calling the function with a particular year</span>
+<span class="n">strongest_earthquakes</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">## Display it</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+strongest_earthquakes = pn.panel(strongest_earthquakes_fn(year)) 
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Display-an-iframe-of-a-Google-Map">Display an iframe of a Google Map<a class="anchor-link" href="#Display-an-iframe-of-a-Google-Map">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Hint</summary><br/>
+
+An iframe is an HTML tag.
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">gmap_fn</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="n">yearly_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">)]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yearly_df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">strongest</span> <span class="o">=</span> <span class="n">yearly_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">strongest</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">strongest</span><span class="o">.</span><span class="n">latitude</span>
+    <span class="k">return</span> <span class="s2">"""</span>
+<span class="s2">    &lt;iframe width="300" height="300" src="https://maps.google.com/maps?q=</span><span class="si">{lat}</span><span class="s2">,</span><span class="si">{lon}</span><span class="s2">&amp;z=6&amp;output=embed"</span>
+<span class="s2">    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"&gt;&lt;/iframe&gt;</span>
+<span class="s2">    """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">)</span>
+
+<span class="c1">## Create a panel component by calling the function with a particular year and wrapping it in the appropriate pane</span>
+<span class="n">gmap</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">## Display it</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="A-plot-[challenge]">A plot [challenge]<a class="anchor-link" href="#A-plot-[challenge]">¶</a></h4><p>If you are up to it, create a custom plot from the <code>year_df</code> dataframe defined below, create a Panel component, and assign it to the <code>plot</code> variable.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Info</summary><br/>
+
+If you are using matplotlib pyplot you can get the figure with ``plot = plt.gcf()`` and the close it with ``plot.close()``
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">year_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="c1">## Create a plot and assign it to the plot variable</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">## Display it</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+This example solution uses concepts covered in the plotting section of the tutorial:
+
+```python
+plot = hv.Violin(year_df, 'type', 'mag').opts(ylim=(0, None), xrotation=90)
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Composing-the-dashboard">Composing the dashboard<a class="anchor-link" href="#Composing-the-dashboard">¶</a></h3><p>Now that we have defined all the different components, it is time to lay them out into the overall dashboard.</p>
+<p>Arrange the following components into a dashboard using the <code>Row</code> and <code>Column</code> panels:</p>
+<ul>
+<li><code>logo</code></li>
+<li><code>equation</code></li>
+<li><code>strongest_earthquakes</code></li>
+<li><code>gmap</code></li>
+<li><code>plot</code> (optional)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+year = 2000
+
+logo = pn.panel(logo_url, width=200)
+equation = pn.pane.LaTeX(equation_string)
+strongest_earthquakes = strongest_earthquakes_fn(year)
+gmap = pn.pane.HTML(gmap_fn(year), height=300, width=300)
+plot = hv.Violin(year_df, 'type', ('mag', 'Magnitude')).opts(ylim=(0, None))
+
+title = pn.panel('# Strongest Earthquakes in the Year %d' % year, width=400)
+header = pn.Row(title, pn.layout.HSpacer(), logo)
+
+body = pn.Row(
+    pn.Column('### Strongest Earthquakes', strongest_earthquakes),
+    pn.Column('### Description', gmap),
+    pn.Column('### Magnitude Plot', plot)
+)
+
+pn.Column(header, body)
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-2">Exercise 2<a class="anchor-link" href="#Exercise-2">¶</a></h3><p>Having learned about how to create interactive components we can now make the formerly static dashboard interactive by adding a widget to control the year.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-widget">The widget<a class="anchor-link" href="#The-widget">¶</a></h4><p>Declare an <code>IntSlider</code> widget with a start value of 2000, end value of 2018, and current value of 2000.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+year_slider = pn.widgets.IntSlider(name='Year', start=2000, end=2018, value=2000)
+year_slider
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-title">The title<a class="anchor-link" href="#The-title">¶</a></h4><p>Write a function with dependencies which returns a title for the given year, e.g. "Strongest Earthquakes in the Year 2000":</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+@pn.depends(year_slider.param.value)
+def title_fn(year):
+    return '## Strongest Earthquakes in the Year {year}'.format(year=year)
+```
+
+</details>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-table-and-map">The table and map<a class="anchor-link" href="#The-table-and-map">¶</a></h4><p>Add dependencies to the functions below so the output updates whenever the slider value changes:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">strongest_earthquakes_fn</span><span class="p">(</span><span class="n">year</span><span class="p">):</span> <span class="c1"># noqa: redefined on purpose</span>
+    <span class="n">year_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">year_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'mag'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">][[</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'place'</span><span class="p">,</span> <span class="s1">'mag'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">gmap_fn</span><span class="p">(</span><span class="n">year</span><span class="p">):</span> <span class="c1"># noqa: redefined on purpose</span>
+    <span class="n">yearly_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">)]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yearly_df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">strongest</span> <span class="o">=</span> <span class="n">yearly_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">strongest</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">strongest</span><span class="o">.</span><span class="n">latitude</span>
+    <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    &lt;iframe width="300" height="300" src="https://maps.google.com/maps?q=</span><span class="si">{lat}</span><span class="s2">,</span><span class="si">{lon}</span><span class="s2">&amp;z=6&amp;output=embed"</span>
+<span class="s2">    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"&gt;&lt;/iframe&gt;</span>
+<span class="s2">    """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-Plot-[challenge]">The Plot [challenge]<a class="anchor-link" href="#The-Plot-[challenge]">¶</a></h4><p>In case you defined a plot above make the plot dynamic by wrapping it in a function which depends on the year.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><details><summary>Solution</summary><br/></details></p>
+<div class="highlight"><pre><span></span><span class="nd">@pn.depends</span><span class="p">(</span><span class="n">year_slider</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">plot_fn</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">year_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">hv</span><span class="o">.</span><span class="n">Violin</span><span class="p">(</span><span class="n">year_df</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'mag'</span><span class="p">,</span> <span class="s1">'Magnitude'</span><span class="p">))</span><span class="o">.</span><span class="n">opts</span><span class="p">(</span><span class="n">xrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Composing-the-dashboard">Composing the dashboard<a class="anchor-link" href="#Composing-the-dashboard">¶</a></h3><p>Now that we have created new dynamic components let us lay them out once again to create a fully interactive dashboard. Ensure that you include the widget so you can actually control the year.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<details><summary>Solution</summary><br/>
+
+```python
+year_slider = pn.widgets.IntSlider(name='Year', start=2000, end=2018, value=2000)
+
+@pn.depends(year_slider.param.value)
+def title_fn(year):
+    return '## Strongest Earthquakes in the Year {year}'.format(year=year)
+
+@pn.depends(year_slider.param.value)
+def strongest_earthquakes_fn(year):
+    year_df = df[df.time.dt.year == year].compute()
+    return year_df.sort_values('mag', ascending=False).iloc[:5][['time', 'place', 'mag']].reset_index(drop=True)
+
+@pn.depends(year_slider.param.value)
+def gmap_fn(year):
+    yearly_df = df[(df.time.dt.year == year)].compute()
+    index = np.argmax(yearly_df.mag.values)
+    strongest = yearly_df.iloc[index]
+    lon, lat = strongest.longitude, strongest.latitude
+    return pn.pane.HTML("""
+    <iframe frameborder="0" height="300" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?q={lat},{lon}&amp;z=6&amp;output=embed" width="300"></iframe>
+    """.format(lat=lat, lon=lon), height=300, width=300)
+
+@pn.depends(year_slider.param.value)
+def plot_fn(year):
+    year_df = df[df.time.dt.year == year].compute()
+    return hv.Violin(year_df, 'type', ('mag', 'Magnitude'))
+
+logo = pn.panel(logo_url, width=200)
+equation = pn.pane.LaTeX(equation_string)
+
+header = pn.Row(title_fn, pn.layout.HSpacer(), logo)
+
+body = pn.Row(
+
+    pn.Column('### Strongest Earthquakes', strongest_earthquakes_fn),
+    pn.Column('### Map', gmap_fn),
+    pn.Column('### Magnitude Plot', plot_fn)
+)
+
+pn.Column(header, year_slider, body)
+```
+
+</details>
+</div>
+</div>
+</div>
+<hr class="docutils"/>
+<p><a class="reference external" href="https://raw.githubusercontent.com/pyviz/pyviz/master/examples/tutorial/exercises/Building_a_Dashboard.ipynb">Right click to download this notebook from GitHub.</a></p>
+</div>
+</div>
+</div>
+<!-- END MAIN BODY OF DOCS ––––––––––––– -->
+<footer class="footer">
+<div class="footer-links">
+<ul>
+<li><span class="footer-title">Links</span></li>
+<li><a href="../../installation.html">Installation</a></li>
+<li><a href="../../talks/index.html">Talks</a></li>
+<li><a href="../index.html">Tutorial</a></li>
+<li><a href="../../topics/index.html">Topics</a></li>
+<li><a href="../../FAQ.html">FAQ</a></li>
+<li><a href="../../about.html">About</a></li>
+<li><a href="../../community.html">Community</a></li>
+</ul>
+<ul>
+<li><span class="footer-title">Join Us</span></li>
+<li><a href="//gitter.im/pyviz/pyviz">Gitter</a></li>
+<li><a href="//github.com/pyviz/holoviz">Github</a></li>
+</ul>
+<ul class="copyright">
+<li>© 2017-2019, HoloViz authors</li>
+</ul>
+</div>
+</footer>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- MathJax Config -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

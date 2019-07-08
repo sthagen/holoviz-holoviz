@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta charset="utf-8"/>
+<title>HoloViz Tutorial — HoloViz 0.11.3 documentation</title>
+<meta content="High-level tools to simplify visualization in Python." name="description"/>
+<meta content="HoloViz authors" name="author"/>
+<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+    WebFont.load({
+      google: {
+        families: ['Source Sans Pro']
+      }
+    });
+  </script>
+<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="../_static/css/main.css" rel="stylesheet"/>
+<link href="../_static/nbsite.css" rel="stylesheet"/>
+<link href="../_static/custom.css" rel="stylesheet"/>
+<!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript">
+</script>
+<script src="../_static/js/main.js"></script>
+<script src="../_static/nbsite.js"></script>
+<script src="../_static/require.js"></script>
+<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="../_static/favicon.ico" rel="icon" type="image/png"/>
+<!-- Canonical
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="/tutorial/index.html" rel="canonical">
+</link></head>
+<body class="">
+<header class="navigation">
+<div class="wrapper">
+<a class="logo" href="../index.html">
+<img alt="Logo" src="../_static/holoviz-logo.svg"/>
+</a>
+<a class="navigation-menu logo-text" href="../index.html">HoloViz</a>
+<a class="navigation-menu-button" href="javascript:void(0)" id="js-mobile-menu">Menu</a>
+<nav>
+<ul class="navigation-menu show" id="js-navigation-menu">
+<li class="nav-link doc-head"><a href="../installation.html">Installation</a></li>
+<li class="nav-link doc-head"><a href="../talks/index.html">Talks</a></li>
+<li class="nav-link doc-head"><a href="#">Tutorial</a></li>
+<li class="nav-link doc-head"><a href="../topics/index.html">Topics</a></li>
+<li class="nav-link doc-head"><a href="../FAQ.html">FAQ</a></li>
+<li class="nav-link doc-head"><a href="../about.html">About</a></li>
+<li class="nav-link doc-head"><a href="../community.html">Community</a></li>
+<li class="nav-link">
+<div style="display:inline-block;vertical-align: middle;">
+<div class="search-bar">
+<form action="../search.html" method="get" role="search">
+<input name="q" placeholder="Search" type="search"/>
+<button type="submit">
+<img alt="Search Icon" src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon-black.png"/>
+</button>
+</form>
+</div>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<!-- MAIN BODY OF DOCS –––––––––––––––––– -->
+<div class="docs section">
+<div id="hacketyhackhack"> <!-- style="width:20%;margin-right: 100px;"> --> <!--style="display: none;"> style="display:none;"> -->
+<div class="toc" style="width:15%; margin-right:20px;">
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks/index.html">Talks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Building_Panels.html">Building Panels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Interlinked_Panels.html">Interlinked Panels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Basic_Plotting.html">Basic Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Composing_Plots.html">Composing Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Interlinked_Plots.html">Interlinked Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Large_Data.html">Large Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Advanced_Dashboards.html">Advanced Dashboards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/index.html">Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a></li>
+</ul>
+</div>
+</div>
+<div class="content"> <!-- style="max-width:80%;margin-left:auto;margin-right: auto;">-->
+<div class="section" id="holoviz-tutorial">
+<h1>HoloViz Tutorial<a class="headerlink" href="#holoviz-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This tutorial will take you through all of the steps involved in exploring data of many different types and sizes, building simple and complex figures, working with billions of data points, adding interactive behavior, widgets and controls, and deploying full dashboards and applications.</p>
+<p>We'll be using a wide range of open-source Python libraries, but focusing on the tools we help maintain as part of the HoloViz project: 
+<a href="https://panel.pyviz.org">Panel</a>, 
+<a href="https://hvplot.pyviz.org">hvPlot</a>,
+<a href="http://holoviews.org">HoloViews</a>,
+<a href="http://geoviews.org">GeoViews</a>,
+<a href="http://datashader.org">Datashader</a>,
+<a href="http://param.pyviz.org">Param</a>, and 
+<a href="http://colorcet.pyviz.org">Colorcet</a>.</p>
+<p><img src="../assets/pn_hp_hv_gv_ds_pa_cs.png" width="800"/></p>
+<p>These tools were previously part of <a href="http://pyviz.org">PyViz.org</a>, but have been pulled out into <a href="http://holoviz.org">HoloViz.org</a> to allow PyViz to be fully neutral and general.</p>
+<p>The HoloViz tools have been carefully designed to work together with each other and with the SciPy ecosystem to address a very wide range of data-analysis and visualization tasks, making it simple to discover, understand, and communicate the important properties of your data.</p>
+<p><img align="center" src="../assets/earthquakes.png"/></p>
+<p>This notebook serves as the homepage of the tutorial, including a table of contents letting you launch each tutorial section.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Index-and-Schedule">Index and Schedule<a class="anchor-link" href="#Index-and-Schedule">¶</a></h2><ul>
+<li><p><strong>Introduction and setup</strong></p>
+<ul>
+<li>  <strong>5 min</strong>  <a href="Setup.html">Setup</a>: Setting up the environment and data files.</li>
+<li><strong>20 min</strong>  <a href="Overview.html">Overview</a>: Overview of the HoloViz tools, philosophy, and approach.</li>
+</ul>
+</li>
+<li><p><strong>Building dashboards using Panel</strong></p>
+<ul>
+<li><strong>15 min</strong>  <a href="Building_Panels.html">Building_Panels</a>: How to make apps and dashboards from Python objects.</li>
+<li>  <strong>5 min</strong>  <a href="./exercises/Building_a_Dashboard.html#Exercise-1"><em>Exercise 1</em></a>: Using a mix of visualizable types, create a panel and serve it.</li>
+<li><strong>10 min</strong>  <a href="Interlinked_Panels.html">Interlinked Panels</a>: Customizing linkages between widgets and displayable objects.</li>
+<li>  <strong>5 min</strong>  <a href="./exercises/Building_a_Dashboard.html#Exercise-2"><em>Exercise 2</em></a>: Add widgets to control your dashboard.</li>
+<li><strong>10 min</strong>  <em>Break</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>The <code>.plot</code> API: a data-centric approach to visualization</strong> <ul>
+<li><strong>30 min</strong>  <a href="Basic_Plotting.html">Basic Plotting</a>: Quick introduction to the <code>.plot</code> interface.</li>
+<li><strong>10 min</strong>  <a href="Composing_Plots.html">Composing Plots</a>: Overlaying and laying out <code>.hvplot</code> outputs to show relationships.</li>
+<li><strong>10 min</strong>  <a href="./exercises/Plotting.html#Exercise-3"><em>Exercise 3</em></a>: Add some <code>.plot</code> or <code>.hvplot</code> visualizations to your dashboard.</li>
+<li><strong>10 min</strong>  <em>Break</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Custom interactivity</strong><ul>
+<li><strong>25 min</strong>  <a href="Interlinked_Plots.html">Interlinked Plots</a>: Connecting HoloViews "streams" to customize behavior.</li>
+<li><strong>10 min</strong>  <a href="./exercises/Plotting.html#Exercise-4"><em>Exercise 4</em></a>: Add a linked visualization with HoloViews.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Working with large datasets</strong><ul>
+<li><strong>20 min</strong>  <a href="Large_Data.html">Large Data</a>: Using Datashader to pre-render data in Python</li>
+<li><strong>10 min</strong>  <em>Break</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Building advanced dashboards</strong><ul>
+<li><strong>15 min</strong>  <a href="Advanced_Dashboards.html">Advanced Dashboards</a>: Using Panel to create an advanced dashboard with linked plots and streams.</li>
+<li><strong>30 min</strong>  <a href="./exercises/Advanced_Dashboarding.html"><em>Exercise 5</em></a>: Build a new dashboard using everything you've learned so far.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Related-links">Related links<a class="anchor-link" href="#Related-links">¶</a></h2><p>You will find extensive support material on the websites for each package. You may find these links particularly useful during the tutorial:</p>
+<ul>
+<li><a href="https://hvplot.pyviz.org/user_guide">hvPlot user guide</a>: Guide to the plots available via <code>.hvplot()</code></li>
+<li><a href="http://holoviews.org/reference/index.html">HoloViews reference gallery</a>: Visual reference of all HoloViews elements and containers, along with some other components</li>
+<li><a href="http://panel.pyviz.org/reference/index.html">Panel reference gallery</a>: Visual reference of all panes, layouts and widgets.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Building_Panels.html">Building Panels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interlinked_Panels.html">Interlinked Panels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Basic_Plotting.html">Basic Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Composing_Plots.html">Composing Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interlinked_Plots.html">Interlinked Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Large_Data.html">Large Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced_Dashboards.html">Advanced Dashboards</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- END MAIN BODY OF DOCS ––––––––––––– -->
+<footer class="footer">
+<div class="footer-links">
+<ul>
+<li><span class="footer-title">Links</span></li>
+<li><a href="../installation.html">Installation</a></li>
+<li><a href="../talks/index.html">Talks</a></li>
+<li><a href="#">Tutorial</a></li>
+<li><a href="../topics/index.html">Topics</a></li>
+<li><a href="../FAQ.html">FAQ</a></li>
+<li><a href="../about.html">About</a></li>
+<li><a href="../community.html">Community</a></li>
+</ul>
+<ul>
+<li><span class="footer-title">Join Us</span></li>
+<li><a href="//gitter.im/pyviz/pyviz">Gitter</a></li>
+<li><a href="//github.com/pyviz/holoviz">Github</a></li>
+</ul>
+<ul class="copyright">
+<li>© 2017-2019, HoloViz authors</li>
+</ul>
+</div>
+</footer>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- MathJax Config -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

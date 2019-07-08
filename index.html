@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta charset="utf-8"/>
+<title>HoloViz 0.11.3 documentation</title>
+<meta content="High-level tools to simplify visualization in Python." name="description"/>
+<meta content="HoloViz authors" name="author"/>
+<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+    WebFont.load({
+      google: {
+        families: ['Source Sans Pro']
+      }
+    });
+  </script>
+<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="_static/css/main.css" rel="stylesheet"/>
+<link href="_static/nbsite.css" rel="stylesheet"/>
+<link href="_static/custom.css" rel="stylesheet"/>
+<!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript">
+</script>
+<script src="_static/js/main.js"></script>
+<script src="_static/nbsite.js"></script>
+<script src="_static/require.js"></script>
+<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="_static/favicon.ico" rel="icon" type="image/png"/>
+<!-- Canonical
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<link href="/index.html" rel="canonical">
+</link></head>
+<body class="">
+<header class="navigation">
+<div class="wrapper">
+<a class="logo" href="#">
+<img alt="Logo" src="_static/holoviz-logo.svg"/>
+</a>
+<a class="navigation-menu logo-text" href="#">HoloViz</a>
+<a class="navigation-menu-button" href="javascript:void(0)" id="js-mobile-menu">Menu</a>
+<nav>
+<ul class="navigation-menu show" id="js-navigation-menu">
+<li class="nav-link doc-head"><a href="installation.html">Installation</a></li>
+<li class="nav-link doc-head"><a href="talks/index.html">Talks</a></li>
+<li class="nav-link doc-head"><a href="tutorial/index.html">Tutorial</a></li>
+<li class="nav-link doc-head"><a href="topics/index.html">Topics</a></li>
+<li class="nav-link doc-head"><a href="FAQ.html">FAQ</a></li>
+<li class="nav-link doc-head"><a href="about.html">About</a></li>
+<li class="nav-link doc-head"><a href="community.html">Community</a></li>
+<li class="nav-link">
+<div style="display:inline-block;vertical-align: middle;">
+<div class="search-bar">
+<form action="search.html" method="get" role="search">
+<input name="q" placeholder="Search" type="search"/>
+<button type="submit">
+<img alt="Search Icon" src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon-black.png"/>
+</button>
+</form>
+</div>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<!-- MAIN BODY OF DOCS –––––––––––––––––– -->
+<div class="docs section">
+<div id="hacketyhackhack"> <!-- style="width:20%;margin-right: 100px;"> --> <!--style="display: none;"> style="display:none;"> -->
+<div class="toc" style="width:15%; margin-right:20px;">
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="talks/index.html">Talks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/index.html">Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Community</a></li>
+</ul>
+</div>
+</div>
+<div class="content"> <!-- style="max-width:80%;margin-left:auto;margin-right: auto;">-->
+<img height="150px" src="assets/holoviz-logo-stacked.svg"/>
+<h1>High-level tools to simplify visualization in Python.</h1>
+<p>Welcome to HoloViz!  HoloViz is a coordinated effort to make browser-based data visualization in Python easier to use, easier to learn, and more powerful.
+
+<p>HoloViz provides:
+
+<ul>
+<li>High-level tools that make it easier to apply Python plotting libraries to your data.
+<li>A comprehensive <a href="tutorial">tutorial</a> showing how to use the available tools together to do a wide range of different tasks.
+<li>A <a href="https://conda.io">Conda</a> metapackage "holoviz" that makes it simple to install matching versions of libraries that work well together.
+<li>Sample datasets to work with.
+</li></li></li></li></ul>
+<h2>HoloViz-maintained libraries</h2>
+<style> img.pvlogo { margin:8px; display:inline; object-fit:scale-down; max-height:85px } </style>
+<div style="margin:10px">
+<a href="https://panel.pyviz.org"><img class="pvlogo" src="assets/panel.png"/></a>
+<a href="https://hvplot.pyviz.org"><img class="pvlogo" src="assets/hvplot.png"/></a>
+<a href="https://holoviews.org"><img class="pvlogo" src="assets/holoviews.png"/></a>
+<a href="http://geoviews.org"><img class="pvlogo" src="assets/geoviews.png"/></a>
+<a href="http://datashader.org"><img class="pvlogo" src="assets/datashader.png"/></a>
+<a href="https://param.pyviz.org"><img class="pvlogo" src="assets/param.png"/></a>
+<a href="https://colorcet.pyviz.org"><img class="pvlogo" src="assets/colorcet.png"/></a>
+</div>
+<p>HoloViz provides a set of Python packages that make viz easier, more accurate, and more powerful:
+<a href="https://panel.pyviz.org">Panel</a>  for making apps and dashboards for your plots from any supported plotting library,
+<a href="https://hvplot.pyviz.org">hvPlot</a> to quickly generate interactive plots from your data,
+<a href="https://holoviews.org">HoloViews</a> to help you make all of your data instantly visualizable,
+<a href="http://geoviews.org">GeoViews</a> to extend HoloViews for geographic data,
+<a href="http://datashader.org">Datashader</a> for rendering even the largest datasets,
+<a href="https://param.pyviz.org">Param</a> to create declarative user-configurable objects, and
+<a href="https://colorcet.pyviz.org">Colorcet</a> for perceptually uniform colormaps.<br/><br/>
+
+Not sure where to start? Try <a href="https://hvplot.pyviz.org">hvPlot</a> for quick and easy one-line plots of your Pandas, Xarray, Dask, and other data types. And try <a href="https://panel.pyviz.org">Panel</a> if you already have visualizations you want to turn into apps or shareable dashboards. Or just work your way through the <a href="tutorial">tutorial</a> to see <i>all</i> the things you can do!
+
+<h2>Building on the SciPy/PyData/PyViz ecosystem</h2>
+<p>HoloViz tools build on the many excellent visualization tools available in the scientific python ecosystem, allowing you to access their power conveniently and efficiently. The core tools make use of <a href="http://bokeh.pydata.org">Bokeh</a>'s interactive plotting, <a href="http://matplotlib.org">Matplotlib</a>'s publication-quality output, and <a href="https://plot.ly">Plotly</a>'s interactive 3D visualizations.  <a href="https://panel.pyviz.org">Panel</a> lets you combine any of these visualizations with output from nearly any other Python plotting library, including specific support for
+<a href="http://seaborn.pydata.org">seaborn</a>,
+<a href="https://altair-viz.github.io">altair</a>,
+<a href="https://vega.github.io">vega</a>,
+<a href="https://plotnine.readthedocs.io">plotnine</a>,
+<a href="https://graphviz.org">graphviz</a>,
+<a href="https://ggplot2.tidyverse.org">ggplot2</a>,
+plus anything that can generate HTML, PNG, or SVG.
+
+<p>HoloViz tools and examples generally work with any Python standard data types (lists, dictionaries, etc.), plus
+<a href="http://pandas.pydata.org">Pandas</a> or
+<a href="http://dask.pydata.org">Dask</a> DataFrames and
+<a href="http://numpy.org">NumPy</a>,
+<a href="http://xarray.pydata.org">Xarray</a>, or
+<a href="http://dask.pydata.org">Dask</a> arrays, including remote data from the
+<a href="https://intake.readthedocs.io">Intake</a> data catalog library. They also use
+<a href="http://dask.pydata.org">Dask</a> and
+<a href="http://numba.pydata.org">Numba</a> to speed up computations along with algorithms and functions from
+<a href="https://bit.ly/2OXxNfN">SciPy</a>.<br/><br/>
+<p>HoloViz tools are designed for general-purpose use, but also support some domain-specific datatypes like graphs from
+<a href="http://networkx.github.io">NetworkX</a> and geographic data from
+<a href="http://geopandas.org">GeoPandas</a> and
+<a href="http://scitools.org.uk/cartopy">Cartopy</a> and
+<a href="https://scitools.org.uk/iris">Iris</a>.<br/>
+Panel can be used with
+<a href="https://yt-project.org">yt</a> for volumetric and physics data and
+<a href="https://sympy.org">SymPy</a> or LaTeX for visualizing equations.<br/>
+HoloViz tools provide extensive support for
+<a href="http://jupyter.org">Jupyter</a> notebooks, as well as for standalone web servers and exporting as static files.<br/><br/>
+<h2>Getting started</h2><p>The <a class="reference external" href="background.html">Background</a> page explains the HoloViz approach in more detail, including how these tools fit together.
+Or you can just skim the material in the <a class="reference external" href="tutorial/index.html">Tutorial</a> online, to get an idea what is covered by these tools.
+If what you see looks relevant to you, you can then follow the steps outlined in <a class="reference external" href="installation.html">Installation</a> to get the libraries, tutorial, and sample data on your own system so you can work through the tutorial yourself. You’ll then have simple-to-adapt starting points for solving your own visualization problems using Python.</p>
+<div class="toctree-wrapper compound">
+</div>
+</p></p></p></p></p></p></div>
+</div>
+<!-- END MAIN BODY OF DOCS ––––––––––––– -->
+<footer class="footer">
+<div class="footer-links">
+<ul>
+<li><span class="footer-title">Links</span></li>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="talks/index.html">Talks</a></li>
+<li><a href="tutorial/index.html">Tutorial</a></li>
+<li><a href="topics/index.html">Topics</a></li>
+<li><a href="FAQ.html">FAQ</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="community.html">Community</a></li>
+</ul>
+<ul>
+<li><span class="footer-title">Join Us</span></li>
+<li><a href="//gitter.im/pyviz/pyviz">Gitter</a></li>
+<li><a href="//github.com/pyviz/holoviz">Github</a></li>
+</ul>
+<ul class="copyright">
+<li>© 2017-2019, HoloViz authors</li>
+</ul>
+</div>
+</footer>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- MathJax Config -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
